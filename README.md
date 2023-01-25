@@ -1,3 +1,3 @@
 <code>
-py manage.py runerver
+py manage.py runserver
 </code>
