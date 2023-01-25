@@ -176,7 +176,7 @@ def edit_profile(request):
                 user.username = username
             if password:
                 if len(password) >= 6:
-                    user.password = password
+                    user.set_password(password)
                 else:
                     return Response('Password have to consist of 6 letter', status.HTTP_401_UNAUTHORIZED)
             if img:
