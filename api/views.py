@@ -19,9 +19,9 @@ def login_view(request):
             if user is not None:
                 token, created = Token.objects.get_or_create(user=user)
                 data = {
-                    'username': username,
-                    'user_id': usr.id,
-                    'token': token.key,
+                    "username": username,
+                    "user_id": usr.id,
+                    "token": token.key,
                 }
                 return Response(data, status.HTTP_200_OK)
             else:
@@ -50,10 +50,10 @@ def register(request):
                 usr = User.objects.create_user(username=username, first_name=name, password=password, status=2)
                 token = Token.objects.create(user=usr)
                 data = {
-                    'username': username,
-                    'name': name,
-                    'user_id': usr.id,
-                    'token': token.key
+                    "username": username,
+                    "name": name,
+                    "user_id": usr.id,
+                    "token": token.key
                     }
                 return Response(data, status.HTTP_200_OK)
             else:
