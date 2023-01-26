@@ -10,5 +10,7 @@ urlpatterns = [
     path('all/task/', get_task),
     path('get/task/<int:pk>/', get_one),
     path('edit/task/<int:pk>/', edit_task),
-    path('delete/task/<int:pk>/', delete_task)
+    path('delete/task/<int:pk>/', delete_task),
+    path('get/users/', get_user)
 ]
+

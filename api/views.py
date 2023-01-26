@@ -205,3 +205,36 @@ def get_one(request, pk):
             return Response('wrong method', status.HTTP_405_METHOD_NOT_ALLOWED)
     except Exception as err:
         return Response(f'error: {err}', status.HTTP_417_EXPECTATION_FAILED)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def get_user(request):
+    try:
+        if request.method == 'GET':
+            user = User.objects.filter(status=2)
+            lu = []
+            for i in user:
+                if i.img:
+                    img = i.img.url
+                else:
+                    img = None
+                token = Token.objects.get(user_id=i.id)
+                if token:
+                    token = token.key
+                else:
+                    token = None
+                data = {
+                    'id': i.id,
+                    'username': i.username,
+                    'name': i.first_name,
+                    'img': img,
+                    'token': token
+                }
+                lu.append(data)
+            return Response(lu)
+        else:
+            return Response('wrong method', status.HTTP_405_METHOD_NOT_ALLOWED)
+    except Exception as err:
+        return Response(f'error is {err}', status.HTTP_417_EXPECTATION_FAILED)

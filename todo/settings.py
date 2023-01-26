@@ -64,7 +64,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'todo.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    '*',
+    'https://google.com',
 ]
 
 TEMPLATES = [
