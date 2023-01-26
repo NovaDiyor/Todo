@@ -238,3 +238,18 @@ def get_user(request):
             return Response('wrong method', status.HTTP_405_METHOD_NOT_ALLOWED)
     except Exception as err:
         return Response(f'error is {err}', status.HTTP_417_EXPECTATION_FAILED)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def profile_view(request):
+    try:
+        if request.method == 'GET':
+            user = request.user
+            return Response(UserVisible(user).data)
+        else:
+            return Response('wrong method', status.HTTP_405_METHOD_NOT_ALLOWED)
+    except Exception as err:
+        return Response(f'error if {err}', status.HTTP_417_EXPECTATION_FAILED)
+
