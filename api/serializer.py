@@ -5,7 +5,7 @@ from .models import *
 class TaskOne(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['title', 'text', 'date', 'completed']
+        fields = '__all__'
 
 
 class UserVisible(serializers.ModelSerializer):
