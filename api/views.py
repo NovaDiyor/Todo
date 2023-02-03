@@ -6,6 +6,7 @@ from .serializer import *
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework import viewsets
 
 
 @api_view(['POST'])
@@ -254,18 +255,6 @@ def profile_view(request):
         return Response(f'error if {err}', status.HTTP_417_EXPECTATION_FAILED)
 
 
-@api_view(['GET')]
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
-def get_user_image(request):
-    try:
-        if request.method == 'GET':
-            user = User.objects.all()
-            ul = []
-            for i in user:
-                ul.append(i.img.url)
-            return Response(ul, status.HTTP_200_OK)
-        return Response('wrong method', status.HTTP_405_METHOD_NOT_ALLOWED)
-    except Exception as err:
-          return Response(f'erorr is {err}', status.HTTP_407_EXPECTATION_FAILED)
-          
+class GetImage(viewsets.ModelViewSet):
+    serializer_class = UserVisible
+    queryset = User.objects.all()
